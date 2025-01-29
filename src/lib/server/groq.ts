@@ -2,13 +2,16 @@ import { env } from '$env/dynamic/private';
 import Groq from 'groq-sdk';
 
 const apiKey = env.GROQ_API_KEY;
-// const accountId = '{account_id}';
-// const gatewayId = '{gateway_id}';
-// const baseURL = `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/groq`;
+const accountId = env.CLOUDFLARE_ACCOUNT_ID;
+const gatewayId = env.CLOUDFLARE_AI_GATEWAY_ID;
+const baseURL = `https://gateway.ai.cloudflare.com/v1/${accountId}/${gatewayId}/groq`;
 
 const groq = new Groq({
-	apiKey
-	// baseURL
+	apiKey,
+	baseURL,
+	defaultHeaders: {
+		'cf-aig-authorization': `Bearer ${env.CLOUDFLARE_AI_GATEWAY_API_TOKEN}`
+	}
 });
 
 const model = 'deepseek-r1-distill-llama-70b';

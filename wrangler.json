@@ -4,14 +4,18 @@
 	"pages_build_output_dir": ".svelte-kit/cloudflare",
 	"compatibility_flags": ["nodejs_compat"],
 	"vars": {
-		"NODE_VERSION": "22.13.1"
+		"NODE_VERSION": "22.13.1",
+		"CLOUDFLARE_AI_GATEWAY_ID": "sevenminuteworkouts",
+		"CLOUDFLARE_ACCOUNT_ID": "9893f1343aaab87f0faf67d2e0e368fc"
 	},
 	"env": {
 		"production": {
 			"compatibility_date": "2025-01-21",
 			"vars": {
 				"NODE_VERSION": "22.13.1",
-				"PUBLIC_PROD": "1"
+				"PUBLIC_PROD": "1",
+				"CLOUDFLARE_AI_GATEWAY_ID": "sevenminuteworkouts",
+				"CLOUDFLARE_ACCOUNT_ID": "9893f1343aaab87f0faf67d2e0e368fc"
 			}
 		}
 	}
