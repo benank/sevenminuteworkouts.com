@@ -1,4 +1,5 @@
 import { env } from '$env/dynamic/private';
+import { isProduction } from '$lib/shared/env';
 import Groq from 'groq-sdk';
 
 const apiKey = env.GROQ_API_KEY;
@@ -10,7 +11,10 @@ const groq = new Groq({
 	apiKey,
 	baseURL,
 	defaultHeaders: {
-		'cf-aig-authorization': `Bearer ${env.CLOUDFLARE_AI_GATEWAY_API_TOKEN}`
+		'cf-aig-authorization': `Bearer ${env.CLOUDFLARE_AI_GATEWAY_API_TOKEN}`,
+		'cf-aig-metadata': JSON.stringify({
+			prod: isProduction
+		})
 	}
 });
 
