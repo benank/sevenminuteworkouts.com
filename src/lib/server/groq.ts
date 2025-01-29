@@ -28,7 +28,8 @@ export const getChatCompletion = async (
 		model,
 		max_completion_tokens: 4096,
 		temperature: 0.6,
-		stream: false
+		stream: false,
+		response_format: { type: 'json_object' }
 	});
 	return chatCompletion.choices[0].message.content;
 };
