@@ -1,9 +1,6 @@
 <script lang="ts">
 	import '../app.css';
 	import { page } from '$app/state';
-	import Button from '$lib/client/components/ui/button/button.svelte';
-	import { PlusIcon, LogOutIcon } from 'lucide-svelte';
-	import * as Tooltip from '$lib/client/components/ui/tooltip';
 	let { children } = $props();
 </script>
 
@@ -29,7 +26,10 @@
 	<meta property="og:image:height" content="256" />
 	<meta property="og:url" content="https://sevenminuteworkouts.com" />
 	<meta property="og:site_name" content="Seven Minute Workouts" />
-	<link rel="canonical" href={page.url.href.replace(page.url.origin, 'https://sevenminuteworkouts.com')} />
+	<link
+		rel="canonical"
+		href={page.url.href.replace(page.url.origin, 'https://sevenminuteworkouts.com')}
+	/>
 	<meta property="og:image" content="https://sevenminuteworkouts.com/favicon.png" />
 	<meta property="og:image:width" content="256" />
 	<meta property="og:image:height" content="256" />
@@ -38,12 +38,10 @@
 </svelte:head>
 
 <div class="overscroll-y-contain bg-slate-950">
-	<div class="sticky inset-0 bottom-auto w-full">
-		<div
-			class="mx-auto flex w-full max-w-screen-lg flex-row items-center justify-center px-4 py-2"
-		>
-			<a href="/" class="rounded-md bg-slate-950 px-2 py-0.5">
-				<span class="font-bold text-3xl">Seven Minute Workouts</span>
+	<div class="fixed inset-0 bottom-auto w-full">
+		<div class="mx-auto flex w-full max-w-screen-lg flex-row items-center justify-start gap-2 p-2">
+			<a href="/" class="rounded-md">
+				<img src="/favicon.png" alt="logo" class="h-8 w-auto rounded-md" />
 			</a>
 		</div>
 	</div>
