@@ -38,13 +38,6 @@
 </svelte:head>
 
 <div class="overscroll-y-contain bg-slate-950">
-	<div class="fixed inset-0 bottom-auto w-full">
-		<div class="mx-auto flex w-full max-w-screen-lg flex-row items-center justify-start gap-2 p-2">
-			<a href="/" class="rounded-md">
-				<img src="/favicon.png" alt="logo" class="h-8 w-auto rounded-md" />
-			</a>
-		</div>
-	</div>
 	{@render children()}
 </div>
 

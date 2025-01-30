@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Tween } from 'svelte/motion';
 	import { workoutStore } from '../stores';
 	import CircularProgress from './CircularProgress.svelte';
 	import Button from './ui/button/button.svelte';
@@ -10,9 +11,13 @@
 	// svelte-ignore non_reactive_update
 	let start: (duration: number) => void;
 	let finished = $state(false);
+	let totalProgress = new Tween(0);
 
 	const startWorkout = () => {
 		started = true;
+		totalProgress.set(1, {
+			duration: $workoutStore!.steps.reduce((acc, step) => acc + step.duration, 0) * 1000
+		});
 		startNextExercise();
 	};
 
@@ -29,24 +34,50 @@
 		}
 	};
 
-	const onProgress = (progress: number) => {
-		console.log('progress', progress);
-	};
+	const onProgress = (progress: number) => {};
 </script>
 
-<div class="flex h-screen max-h-screen w-screen items-center justify-center">
-	<div class="flex flex-col gap-4 pt-16">
-		<h1 class="mb-4 text-balance text-center text-2xl font-semibold">It's time to work out!</h1>
-		<div class="flex flex-col gap-4 pb-10">
+{#if !finished}
+	<div
+		class="flex h-screen max-h-screen w-screen"
+		class:justify-center={!started}
+		class:items-center={!started}
+	>
+		<div class="flex flex-col gap-4" class:items-center={!started}>
 			{#if !started}
-				<Button onclick={startWorkout}>Start</Button>
-			{:else}
-				<h2 class="w-full bg-orange-700 p-2 text-center font-bold">{exercise.exercise}</h2>
-				<p class="px-4 text-sm">{exercise.description}</p>
+				<h1 class="mb-4 text-balance text-center text-2xl font-semibold">It's time to work out!</h1>
 			{/if}
-			<div class="p-4">
-				<CircularProgress bind:start {onFinish} {onProgress} />
+			<div class="flex h-full w-full flex-col items-center gap-4 pb-10">
+				{#if !started}
+					<Button class="w-full" onclick={startWorkout}>Start</Button>
+				{:else}
+					<div>
+						<h2 class="w-screen bg-orange-700 p-4 text-center text-4xl font-bold">
+							{exercise.exercise}
+						</h2>
+						<div class="flex w-screen flex-col items-center justify-center bg-orange-900 p-4">
+							<p class="max-w-screen-sm text-balance text-center text-xl">{exercise.description}</p>
+						</div>
+					</div>
+				{/if}
+				<div
+					class="flex h-full w-full max-w-screen-sm flex-col justify-center p-4"
+					class:hidden={!started}
+				>
+					<CircularProgress bind:start {onFinish} {onProgress} />
+				</div>
+				<div
+					class="absolute inset-0 top-auto h-4 bg-white/50"
+					style="width: {totalProgress.current * 100}%"
+				></div>
 			</div>
 		</div>
 	</div>
-</div>
+{:else}
+	<div
+		class="flex h-screen max-h-screen w-screen flex-col items-center justify-center gap-8 text-center"
+	>
+		<h1 class="text-4xl font-bold">Nice work! You've completed your workout!</h1>
+		<h3 class="text-xl">That wasn't so bad, was it?</h3>
+	</div>
+{/if}

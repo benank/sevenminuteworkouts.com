@@ -30,15 +30,15 @@
 	};
 </script>
 
-<div class="w-full relative">
+<div class="relative w-full">
 	<svg viewBox="0 0 100 100" class="w-full">
-		<circle cx="50" cy="50" r="45" fill="none" stroke="#e6e6e6" stroke-width="10" />
+		<circle cx="50" cy="50" r="45" fill="none" stroke="#64748b" stroke-width="10" />
 		<circle
 			cx="50"
 			cy="50"
 			r="45"
 			fill="none"
-			stroke="#4a90e2"
+			stroke="#facc15"
 			stroke-width="10"
 			stroke-linecap="round"
 			stroke-dasharray={strokeDasharray}
@@ -46,9 +46,11 @@
 			transform="rotate(-90 50 50)"
 		/>
 	</svg>
-    {#if progress.current < 1}
-        <div class="absolute inset-0 m-auto flex items-center justify-center text-center text-7xl md:text-8xl font-bold">
-            {Math.ceil(progress.current * duration)}
-        </div>
-    {/if}
+	{#if progress.current < 1}
+		<div
+			class="absolute inset-0 m-auto flex items-center justify-center text-center text-7xl font-bold sm:text-9xl"
+		>
+			{Math.ceil(progress.current * duration)}
+		</div>
+	{/if}
 </div>

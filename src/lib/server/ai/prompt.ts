@@ -21,6 +21,8 @@ The workout should include:
 - Rest periods between exercises (duration varies based on intensity)
 - Varied exercises and stretches appropriate for the intensity level
 
+Only include bodyweight exercises in the workout. The workout should be able to be completed anywhere, anytime, without equipment. Exercises can take inspiration from bodyweight fitness programs, such as Convict Conditioning, but should not be limited to them.
+
 Format the response as JSON with the following structure:
 {
   "steps": [
