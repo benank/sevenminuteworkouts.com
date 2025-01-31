@@ -3,6 +3,8 @@
 	import { workoutStore } from '../stores';
 	import CircularProgress from './CircularProgress.svelte';
 	import Button from './ui/button/button.svelte';
+	import { onMount } from 'svelte';
+	import { requestWakeLock } from '../wakelock';
 
 	let started = $state(false);
 	let step = $state(0);
@@ -12,6 +14,11 @@
 	let start: (duration: number) => void;
 	let finished = $state(false);
 	let totalProgress = new Tween(0);
+
+	onMount(() => {
+		// Request wake lock so the screen doesn't dim
+		requestWakeLock();
+	})
 
 	const startWorkout = () => {
 		started = true;
