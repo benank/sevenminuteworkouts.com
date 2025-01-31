@@ -59,16 +59,16 @@
 					<Button class="w-full" onclick={startWorkout}>Start</Button>
 				{:else}
 					<div>
-						<h2 class="w-screen bg-orange-700 p-4 text-center text-4xl font-bold">
+						<h2 class="w-screen bg-orange-700 p-3 text-center text-4xl font-bold">
 							{exercise.exercise}
 						</h2>
-						<div class="flex w-screen flex-col items-center justify-center bg-orange-900 p-4">
+						<div class="flex w-screen flex-col items-center justify-center bg-orange-900 p-2">
 							<p class="max-w-screen-sm text-balance text-center text-lg">{exercise.description}</p>
 						</div>
 					</div>
 				{/if}
 				<div
-					class="flex h-full w-full max-w-screen-sm flex-col justify-center p-4"
+					class="flex h-full w-full max-w-screen-sm flex-col justify-center px-4 py-2"
 					class:hidden={!started}
 				>
 					<CircularProgress bind:start {onFinish} {onProgress} />
