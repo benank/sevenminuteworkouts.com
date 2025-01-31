@@ -2,10 +2,8 @@
 // for information about these interfaces
 declare global {
 	namespace App {
-		interface Locals {
-		}
-		interface Platform {
-		}
+		interface Locals {}
+		interface Platform {}
 	}
 }
 
