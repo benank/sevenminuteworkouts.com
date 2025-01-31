@@ -70,3 +70,33 @@ export const WORKOUT_TYPES_DATA: Record<WorkoutType, TitleAndDescription> = {
 			'Focus on your core muscles with planks, crunches, Russian twists, and leg raises to improve stability and definition.'
 	}
 };
+
+export const WORKOUT_FITNESS = ['couch_potato', 'casual', 'gym', 'fit', 'olympian'] as const;
+export type WorkoutFitness = (typeof WORKOUT_FITNESS)[number];
+export const WORKOUT_FITNESS_DATA: Record<WorkoutFitness, TitleAndDescription> = {
+	couch_potato: {
+		title: 'Couch Potato',
+		description:
+			"You've perfected the art of sitting. Your daily exercise is walking to the fridge and back."
+	},
+	casual: {
+		title: 'Casual',
+		description:
+			'You maintain average fitness through regular walking and light activities. Your consistency keeps you in good shape without needing a gym routine.'
+	},
+	gym: {
+		title: 'Gym Rat',
+		description:
+			'You hit the gym regularly but still enjoy your guilty pleasure foods. Your fitness journey is all about balance... and maybe a few protein shakes.'
+	},
+	fit: {
+		title: 'Fit Beast',
+		description:
+			"You're in top physical condition. People might actually think you're a professional athlete."
+	},
+	olympian: {
+		title: 'Olympian',
+		description:
+			"You're at the peak of human physical fitness. You could probably win a gold medal in just about anything. You're a fitness legend."
+	}
+};

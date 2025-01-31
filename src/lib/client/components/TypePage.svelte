@@ -12,7 +12,7 @@
 				<Button
 					class="flex h-fit w-full max-w-96 flex-col items-start justify-center gap-1 text-wrap text-start leading-6"
 					onclick={() => {
-						$pageStateStore = 'creating';
+						$pageStateStore = 'fitness';
 						$workoutTypeStore = focus as WorkoutType;
 					}}
 				>

@@ -56,7 +56,7 @@
 							{exercise.exercise}
 						</h2>
 						<div class="flex w-screen flex-col items-center justify-center bg-orange-900 p-4">
-							<p class="max-w-screen-sm text-balance text-center text-xl">{exercise.description}</p>
+							<p class="max-w-screen-sm text-balance text-center text-lg">{exercise.description}</p>
 						</div>
 					</div>
 				{/if}
@@ -67,7 +67,7 @@
 					<CircularProgress bind:start {onFinish} {onProgress} />
 				</div>
 				<div
-					class="absolute inset-0 top-auto h-4 bg-white/50"
+					class="absolute inset-0 top-auto h-4 bg-sky-500"
 					style="width: {totalProgress.current * 100}%"
 				></div>
 			</div>
@@ -77,7 +77,7 @@
 	<div
 		class="flex h-screen max-h-screen w-screen flex-col items-center justify-center gap-8 text-center"
 	>
-		<h1 class="text-4xl font-bold">Nice work! You've completed your workout!</h1>
+		<h1 class="text-4xl font-bold">Great job! You've completed your workout!</h1>
 		<h3 class="text-xl">That wasn't so bad, was it?</h3>
 	</div>
 {/if}

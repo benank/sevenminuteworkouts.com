@@ -1,6 +1,8 @@
 import {
+	type WorkoutFitness,
 	type WorkoutIntensity,
 	type WorkoutType,
+	WORKOUT_FITNESS_DATA,
 	WORKOUT_INTENSITY_DATA,
 	WORKOUT_TYPES_DATA
 } from '$lib/shared/options';
@@ -23,6 +25,10 @@ The workout should include:
 
 Only include bodyweight exercises in the workout. The workout should be able to be completed anywhere, anytime, without equipment. Exercises can take inspiration from bodyweight fitness programs, such as Convict Conditioning, but should not be limited to them.
 
+The user's current fitness level is the following, and the workout should be tailored to their level:
+{fitnessTitle}
+{fitnessDescription}
+
 Format the response as JSON with the following structure:
 {
   "steps": [
@@ -39,12 +45,14 @@ Ensure the total duration does not exceed 7 minutes, including rest periods. For
 - Adjust exercise duration based on intensity level
 - The duration of each step is in seconds
 
+The description should be one sentence explaining what the exercise is and how to perform it. They should be written in the imperative tense.
+
 Example response format:
 {
   "steps": [
     {
       "exercise": "Jumping Jacks",
-      "description": "High knees, full range of motion",
+      "description": "Start with your feet together and hands by your sides, then jump your feet apart while raising your arms overhead, and quickly return to the starting position, and repeat!",
       "duration": 30
     },
     {
@@ -56,26 +64,27 @@ Example response format:
 }
 `;
 
-export function generateWorkoutPrompt(intensity: WorkoutIntensity, type: WorkoutType): string {
+const REST_DURATION: Record<WorkoutIntensity, number> = {
+	restorative: 20,
+	balanced: 15,
+	intense: 7
+};
+
+export function generateWorkoutPrompt(
+	intensity: WorkoutIntensity,
+	type: WorkoutType,
+	fitness: WorkoutFitness
+): string {
 	const intensityData = WORKOUT_INTENSITY_DATA[intensity];
 	const typeData = WORKOUT_TYPES_DATA[type];
+	const fitnessData = WORKOUT_FITNESS_DATA[fitness];
+	const restDuration = REST_DURATION[intensity];
 
-	let restDuration = 0;
-	switch (intensity) {
-		case 'restorative':
-			restDuration = 30; // Longer rest for restorative workouts
-			break;
-		case 'balanced':
-			restDuration = 20; // Moderate rest
-			break;
-		case 'intense':
-			restDuration = 10; // Short rest for intense workouts
-			break;
-	}
-
-	return WORKOUT_PROMPT.replace('{intensityTitle}', intensityData.title)
-		.replace('{typeTitle}', typeData.title)
-		.replace('{intensityDescription}', intensityData.description)
-		.replace('{typeDescription}', typeData.description)
-		.replace('{restDuration}', restDuration.toString());
+	return WORKOUT_PROMPT.replaceAll('{intensityTitle}', intensityData.title)
+		.replaceAll('{typeTitle}', typeData.title)
+		.replaceAll('{intensityDescription}', intensityData.description)
+		.replaceAll('{typeDescription}', typeData.description)
+		.replaceAll('{restDuration}', restDuration.toString())
+		.replaceAll('{fitnessTitle}', fitnessData.title)
+		.replaceAll('{fitnessDescription}', fitnessData.description);
 }

@@ -31,5 +31,6 @@ export const getChatCompletion = async (
 		stream: false,
 		response_format: { type: 'json_object' }
 	});
+
 	return chatCompletion.choices[0].message.content;
 };
